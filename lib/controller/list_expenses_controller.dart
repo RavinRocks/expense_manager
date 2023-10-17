@@ -1,3 +1,4 @@
+// ignore_for_file: non_constant_identifier_names, camel_case_types
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../sql_helper.dart';
@@ -5,11 +6,9 @@ import '../sql_helper.dart';
 class list_expenses_controller extends GetxController {
 
   late List<Map<String, dynamic>> data=<Map<String, dynamic>>[].obs;
-
   Map<String, double> dataMap = {};
   RxDouble total_expense=0.0.obs;
   RxString salleryctr="0".obs;
-
   Rx<TextEditingController> sallery_controller = TextEditingController().obs;
 
   late List<Map<String, dynamic>> month_data=<Map<String, dynamic>>[].obs;
@@ -41,17 +40,13 @@ class list_expenses_controller extends GetxController {
   {
     total_expense.value=0.0;
     dataMap.clear();
-    print("${data.length} length");
     int mymonth=int.parse(month);
 
-    if(mymonth<=9)
-    {
+    if(mymonth<=9) {
       month="0$month";
     }
-    for(var i=0;i<data.length;i++)
-    {
+    for(var i=0;i<data.length;i++) {
       if(data[i]['date'].toString().substring(5,7)==month){
-
         print("Month="+data[i]['date'].toString().substring(5,7).toString());
         dataMap[data[i]['catagory'].toString()]=double.parse(data[i]['price']);
         total_expense.value+=double.parse(data[i]['price']);
@@ -80,22 +75,18 @@ class list_expenses_controller extends GetxController {
   List<Map<String, dynamic>> julydata(String month)
   {
     int mymonth=int.parse(month);
-    if(mymonth<=9)
-    {
+    if(mymonth<=9) {
       month="0$month";
     }
     july_data.clear();
-    for(var i=0;i<data.length;i++)
-    {
+    for(var i=0;i<data.length;i++) {
       if(data[i]['date'].toString().substring(5,7)==month){
         july_data.add(data[i]);
       }
     }
-
     update();
     return july_data;
   }
-
   mydelete(int id)
   async {
     await SQLHelper.deleteItem(id);

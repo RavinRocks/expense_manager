@@ -1,15 +1,9 @@
 import 'package:shared_preferences/shared_preferences.dart';
-class
-Helper {
+class Helper {
   static String valueSharedPreferences = 'salary';
-
   static Future<bool> setSalary(value) async
   {
-    SharedPreferences sharedPreferences =
-    await SharedPreferences.getInstance();
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     return await sharedPreferences.setString(valueSharedPreferences, value);
   }
-  static Future getSalary() async
-  {
-       }
 }

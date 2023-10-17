@@ -52,12 +52,12 @@ class _expenses_chartState extends State<expenses_chart> {
             body: Column(
               children: [
                 SfCartesianChart(
-                  legend: Legend(isVisible: true),
+                  legend: const Legend(isVisible: true),
                   title: ChartTitle(text: "Expenses"),
                   series: <ChartSeries>[
                     StackedBarSeries<ExpenseData, String>(
                         name: "Months",
-                        markerSettings: MarkerSettings(isVisible: true),
+                        markerSettings: const MarkerSettings(isVisible: true),
                         dataSource: myexp_data2,
                         xValueMapper: (ExpenseData exp, _) =>
                             exp.monthly_expense,
@@ -72,7 +72,6 @@ class _expenses_chartState extends State<expenses_chart> {
         });
   }
 }
-
 class ExpenseData {
   ExpenseData(this.monthly_expense, this.total_spending);
   String monthly_expense;

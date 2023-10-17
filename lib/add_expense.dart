@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,7 +15,6 @@ class add_expense extends StatefulWidget {
 
 class _add_expenseState extends State<add_expense> {
 
-  static const routeNamed = "/addexpe";
   AddNote_Controller _addNote_Controller = Get.put(AddNote_Controller());
   final TextEditingController price_controller = TextEditingController();
   DateTime? mydate = DateTime.now();
@@ -30,194 +31,189 @@ class _add_expenseState extends State<add_expense> {
   }
 
   Widget myfun() {
-    return Container(
-      child: IconButton(
-        onPressed: () {
-          showGeneralDialog(
-            context: context,
-            barrierLabel: "showGeneralDialog",
-            barrierDismissible: true,
-            barrierColor: Colors.black.withOpacity(0.0),
-            transitionDuration: const Duration(milliseconds: 400),
-            pageBuilder: (context, animation, secondaryAnimation) {
-              return Align(
-                alignment: Alignment.bottomCenter,
-                child: Material(
-                  child: Container(
-                    height: 210,
-                    margin: const EdgeInsets.all(5),
-                    padding: const EdgeInsets.all(5),
-                    child: Column(
-                      children: [
-                        Container(
-                          color: Colors.greenAccent,
-                          padding: const EdgeInsets.all(5),
-                          margin: const EdgeInsets.all(5),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  myCatagory = "Credit Card Bill";
-                                  _addNote_Controller.updatecatagory_text(myCatagory);
-                                  Navigator.pop(context);
-                                  setState(() {});
-                                },
-                                child: const Column(
-                                  children: [
-                                    Icon(Icons.cabin),
-                                    Text("Credit Card Bill")
-                                  ],
-                                ),
+    return IconButton(
+      onPressed: () {
+        showGeneralDialog(
+          context: context,
+          barrierLabel: "showGeneralDialog",
+          barrierDismissible: true,
+          barrierColor: Colors.black.withOpacity(0.0),
+          transitionDuration: const Duration(milliseconds: 400),
+          pageBuilder: (context, animation, secondaryAnimation) {
+            return Align(
+              alignment: Alignment.bottomCenter,
+              child: Material(
+                child: Container(
+                  height: 210,
+                  margin: const EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
+                  child: Column(
+                    children: [
+                      Container(
+                        color: Colors.greenAccent,
+                        padding: const EdgeInsets.all(5),
+                        margin: const EdgeInsets.all(5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                myCatagory = "Credit Card Bill";
+                                _addNote_Controller.updatecatagory_text(myCatagory);
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: const Column(
+                                children: [
+                                  Icon(Icons.cabin),
+                                  Text("Credit Card Bill")
+                                ],
                               ),
-                              InkWell(
-                                onTap: () {
-                                  myCatagory = "Petrol";
-                                  _addNote_Controller.updatecatagory_text(myCatagory);
-                                  Navigator.pop(context);
-                                  setState(() {});
-                                },
-                                child: const Column(
-                                  children: [
-                                    Icon(Icons.propane_tank),
-                                    Text("Petrol")
-                                  ],
-                                ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myCatagory = "Petrol";
+                                _addNote_Controller.updatecatagory_text(myCatagory);
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: const Column(
+                                children: [
+                                  Icon(Icons.propane_tank),
+                                  Text("Petrol")
+                                ],
                               ),
-                              InkWell(
-                                onTap: () {
-                                  myCatagory = "Mobile Recharge";
-                                  _addNote_Controller.updatecatagory_text(myCatagory);
-                                  Navigator.pop(context);
-                                  setState(() {});
-                                },
-                                child: const Column(
-                                  children: [
-                                    Icon(Icons.mobile_friendly),
-                                    Text("Mobile Recharge")
-                                  ],
-                                ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myCatagory = "Mobile Recharge";
+                                _addNote_Controller.updatecatagory_text(myCatagory);
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: const Column(
+                                children: [
+                                  Icon(Icons.mobile_friendly),
+                                  Text("Mobile Recharge")
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        Container(
-                          color: Colors.orangeAccent,
-                          margin: const EdgeInsets.all(5),
-                          padding: const EdgeInsets.all(5),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  myCatagory = "Shopping";
-                                  _addNote_Controller.updatecatagory_text(myCatagory);
-                                  Navigator.pop(context);
-                                  setState(() {});
-                                },
-                                child: const Column(
-                                  children: [
-                                    Icon(Icons.shopping_basket_sharp),
-                                    Text("Shopping")
-                                  ],
-                                ),
+                      ),
+                      Container(
+                        color: Colors.orangeAccent,
+                        margin: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                myCatagory = "Shopping";
+                                _addNote_Controller.updatecatagory_text(myCatagory);
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: const Column(
+                                children: [
+                                  Icon(Icons.shopping_basket_sharp),
+                                  Text("Shopping")
+                                ],
                               ),
-                              InkWell(
-                                onTap: () {
-                                  myCatagory = "Medical";
-                                  _addNote_Controller.updatecatagory_text(myCatagory);
-                                  Navigator.pop(context);
-                                  setState(() {});
-                                },
-                                child: const Column(
-                                  children: [
-                                    Icon(Icons.medical_information),
-                                    Text("Medical")
-                                  ],
-                                ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myCatagory = "Medical";
+                                _addNote_Controller.updatecatagory_text(myCatagory);
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: const Column(
+                                children: [
+                                  Icon(Icons.medical_information),
+                                  Text("Medical")
+                                ],
                               ),
-                              InkWell(
-                                onTap: () {
-                                  myCatagory = "Insurance";
-                                  _addNote_Controller.updatecatagory_text(myCatagory);
-                                  Navigator.pop(context);
-                                  setState(() {});
-                                },
-                                child: const Column(
-                                  children: [
-                                    Icon(Icons.policy),
-                                    Text("Insurance")
-                                  ],
-                                ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myCatagory = "Insurance";
+                                _addNote_Controller.updatecatagory_text(myCatagory);
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: const Column(
+                                children: [
+                                  Icon(Icons.policy),
+                                  Text("Insurance")
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        Container(
-                          color: Colors.greenAccent,
-                          margin: const EdgeInsets.all(5),
-                          padding: const EdgeInsets.all(5),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  myCatagory = "Light Bill";
-                                  _addNote_Controller.updatecatagory_text(myCatagory);
-                                  Navigator.pop(context);
-                                  setState(() {});
-                                },
-                                child: const Column(
-                                  children: [
-                                    Icon(Icons.lightbulb_circle),
-                                    Text("Light Bill")
-                                  ],
-                                ),
+                      ),
+                      Container(
+                        color: Colors.greenAccent,
+                        margin: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                myCatagory = "Light Bill";
+                                _addNote_Controller.updatecatagory_text(myCatagory);
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: const Column(
+                                children: [
+                                  Icon(Icons.lightbulb_circle),
+                                  Text("Light Bill")
+                                ],
                               ),
-                              InkWell(
-                                onTap: () {
-                                  myCatagory = "Gas Bill";
-                                  _addNote_Controller.updatecatagory_text(myCatagory);
-                                  Navigator.pop(context);
-                                  setState(() {});
-                                },
-                                child: const Column(
-                                  children: [
-                                    Icon(Icons.gas_meter),
-                                    Text("Gas Bill")
-                                  ],
-                                ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myCatagory = "Gas Bill";
+                                _addNote_Controller.updatecatagory_text(myCatagory);
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: const Column(
+                                children: [
+                                  Icon(Icons.gas_meter),
+                                  Text("Gas Bill")
+                                ],
                               ),
-                              InkWell(
-                                onTap: () {
-                                  myCatagory = "Other";
-                                  _addNote_Controller.updatecatagory_text(myCatagory);
-                                  Navigator.pop(context);
-                                  setState(() {});
-                                },
-                                child: const Column(
-                                  children: [
-                                    Icon(Icons.other_houses_outlined),
-                                    Text("Other")
-                                  ],
-                                ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                myCatagory = "Other";
+                                _addNote_Controller.updatecatagory_text(myCatagory);
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: const Column(
+                                children: [
+                                  Icon(Icons.other_houses_outlined),
+                                  Text("Other")
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-              );
-            },
-          );
-        },
-        icon: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-      ),
+              ),
+            );
+          },
+        );
+      },
+      icon: const Icon(Icons.add, color: Colors.white,),
     );
   }
 
@@ -244,10 +240,7 @@ class _add_expenseState extends State<add_expense> {
                       children: [
                         Text(
                           _addNote_Controller.catagory_text.toString(),
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15),
+                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
                         ),
                         myfun(),
                       ],
@@ -270,9 +263,7 @@ class _add_expenseState extends State<add_expense> {
                   ),
                 ),
                 Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.grey),
                   padding: const EdgeInsets.all(5),
                   margin: const EdgeInsets.all(10),
                   child: CalendarTimeline(
@@ -300,20 +291,16 @@ class _add_expenseState extends State<add_expense> {
                       onPressed: () {},
                       child: InkWell(
                           onTap: () {
-                            if (myCatagory != "null" &&
-                                price_controller.text.isNotEmpty) {
+                            if (myCatagory != "null" && price_controller.text.isNotEmpty) {
                               _addItem();
                             } else {
                               // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Enter All Data"+mydate.toString()+" "+myCatagory+" "+price_controller.text,)));
-                              Get.showSnackbar(const GetSnackBar(
-                                  title: "Enter Valid Details",
-                                  message: "No Data Found"));
+                              Get.showSnackbar(const
+                              GetSnackBar(title: "Enter Valid Details", message: "No Data Found"));
                             }
                             setState(() {});
                           },
-                          child: const Text(
-                            "Save",
-                            style: TextStyle(color: Colors.white),
+                          child: const Text("Save",style: TextStyle(color: Colors.white),
                           ))),
                 )
               ],

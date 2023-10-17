@@ -1,3 +1,4 @@
+// ignore_for_file: non_constant_identifier_names
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -10,7 +11,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super .key});
 
@@ -37,11 +37,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   String salary = "00";
-
   final dashboard_controller = Get.put(list_expenses_controller());
   late List<Map<String, dynamic>> month_data = <Map<String, dynamic>>[].obs;
-  double petrol = 0.0;
 
+  double petrol = 0.0;
   var curr_month = DateTime.now().month.toString();
   TextEditingController sallery_controller = TextEditingController();
 
@@ -64,18 +63,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return GetBuilder(
         init: dashboard_controller,
-        builder: (dashboard_controller) {
+        builder: (dashboardController) {
           return Scaffold(
             appBar: AppBar(
-              leading: Icon(Icons.home),
-              backgroundColor: Colors.white,
-              titleSpacing: 0,
-              elevation: 0,
-              iconTheme: const IconThemeData(color: Colors.black),
-              title: Text(
-                widget.title,
-                style: const TextStyle(color: Colors.black),
-              ),
+              leading: const Icon(Icons.home),
+              backgroundColor: Colors.white, titleSpacing: 0,
+              elevation: 0, iconTheme: const IconThemeData(color: Colors.black),
+              title: Text(widget.title, style: const TextStyle(color: Colors.black),),
             ),
             body: SingleChildScrollView(
               child: Container(
@@ -88,37 +82,18 @@ class _MyHomePageState extends State<MyHomePage> {
                         onTap: () => Get.to(expenses_chart()),
                         child: Card(
                           margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          elevation: 45,
-                          color: Colors.grey,
+                          elevation: 45, color: Colors.grey,
                           shadowColor: Colors.black,
                           child: Container(
                             margin: const EdgeInsets.all(10),
                             padding: const EdgeInsets.all(5),
-                            width: MediaQuery.of(context).size.width,
-                            height: 70,
+                            width: MediaQuery.of(context).size.width,height: 70,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                //SizedBox(height: 10,),
-                                const Text("Monthly Spending",
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold)),
-                                Text(
-                                    "${dashboard_controller.total_expense.toDouble()} Rs",
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.greenAccent)),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                /* const Text("100 Rs Less than Last Month",
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w300)),*/
+                                    const Text("Monthly Spending",style: TextStyle(fontSize: 12,color: Colors.white,fontWeight: FontWeight.bold)),
+                                    Text("${dashboardController.total_expense.toDouble()} Rs", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.greenAccent)),
+                                    const SizedBox(height: 10,),
                               ],
                             ),
                           ),
@@ -133,8 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Container(
                           padding: const EdgeInsets.all(8),
                           width: double.infinity,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15)),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
                           child: Center(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -147,11 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: InkWell(
                                         onTap: () => Get.to(expenses_chart()),
-                                        child: Text(
-                                          "BALANCE  \n${int.parse(salary) - dashboard_controller.total_expense.toInt()} Rs",
-                                          style: const TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold),
+                                        child: Text("BALANCE  \n${int.parse(salary) - dashboardController.total_expense.toInt()} Rs",style: const TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
                                         ),
                                       ),
                                     ),
@@ -163,10 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        "SALARY \n${salary} Rs",
-                                        style: const TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
+                                        "SALARY \n${salary} Rs", style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ),
@@ -183,16 +150,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 padding: const EdgeInsets.all(8.0),
                                                 child: TextField(
                                                   inputFormatters: [
-                                                    FilteringTextInputFormatter
-                                                        .digitsOnly
+                                                    FilteringTextInputFormatter.digitsOnly
                                                   ],
                                                   controller: sallery_controller,
                                                   decoration: const InputDecoration(
                                                     labelText: "Enter Amount",
-                                                    hintStyle: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 15,
-                                                    ),
+                                                    hintStyle: TextStyle(color: Colors.white, fontSize: 15,),
                                                   ),
                                                 ),
                                               ),
@@ -200,10 +163,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   onPressed: () async {
                                                     SharedPreferences prefs =  await SharedPreferences.getInstance();
                                                     prefs.setString('salary', sallery_controller.text);
-                                                    dashboard_controller.salleryctr.value = sallery_controller.text;
+                                                    dashboardController.salleryctr.value = sallery_controller.text;
                                                     Get.back();
                                                     _loadCounter();
-                                                    setState(() {});
+                                                    setState(() {}
+                                                    );
                                                   },
                                                   child: Card(
                                                       shadowColor: Colors.black,
@@ -212,25 +176,23 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       child: Container(
                                                           height: 20,
                                                           width: 50,
-                                                          child: const Text(
-                                                            "Set",
-                                                            textAlign: TextAlign.center,
-                                                          ))))
+                                                          child: const Text("Set", textAlign: TextAlign.center,)
+                                                      )
+                                                  )
+                                              )
                                             ]),
                                           ),
                                         ));
                                       },
-                                      child: const Text(
-                                        "SET SALARY",
-                                        style: TextStyle(color: Colors.greenAccent),
-                                      ))
+                                      child: const Text("SET SALARY", style: TextStyle(color: Colors.greenAccent),
+                                      )
+                                  )
                                 ],
                               ))),
                     ),
                     const SizedBox(
                       height: 15,
                     ),
-
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
@@ -238,10 +200,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           TextButton(
                               onPressed: () {
                                 if (month_data.isNotEmpty) month_data.clear();
-                                month_data = dashboard_controller.julydata("1");
+                                month_data = dashboardController.julydata("1");
 
                                 if (dataMap.isNotEmpty) dataMap.clear();
-                                dataMap = dashboard_controller.myfunction("1");
+                                dataMap = dashboardController.myfunction("1");
 
                                 setState(() {});
                               },
@@ -249,10 +211,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           TextButton(
                               onPressed: () {
                                 if (month_data.isNotEmpty) month_data.clear();
-                                month_data = dashboard_controller.julydata("2");
+                                month_data = dashboardController.julydata("2");
 
                                 if (dataMap.isNotEmpty) dataMap.clear();
-                                dataMap = dashboard_controller.myfunction("2");
+                                dataMap = dashboardController.myfunction("2");
 
                                 setState(() {});
                               },
@@ -260,10 +222,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           TextButton(
                               onPressed: () {
                                 if (month_data.isNotEmpty) month_data.clear();
-                                month_data = dashboard_controller.julydata("3");
+                                month_data = dashboardController.julydata("3");
 
                                 if (dataMap.isNotEmpty) dataMap.clear();
-                                dataMap = dashboard_controller.myfunction("3");
+                                dataMap = dashboardController.myfunction("3");
 
                                 setState(() {});
                               },
@@ -271,10 +233,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           TextButton(
                               onPressed: () {
                                 if (month_data.isNotEmpty) month_data.clear();
-                                month_data = dashboard_controller.julydata("4");
+                                month_data = dashboardController.julydata("4");
 
                                 if (dataMap.isNotEmpty) dataMap.clear();
-                                dataMap = dashboard_controller.myfunction("4");
+                                dataMap = dashboardController.myfunction("4");
 
                                 setState(() {});
                               },
@@ -282,10 +244,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           TextButton(
                               onPressed: () {
                                 if (month_data.isNotEmpty) month_data.clear();
-                                month_data = dashboard_controller.julydata("5");
+                                month_data = dashboardController.julydata("5");
 
                                 if (dataMap.isNotEmpty) dataMap.clear();
-                                dataMap = dashboard_controller.myfunction("5");
+                                dataMap = dashboardController.myfunction("5");
 
                                 setState(() {});
 
@@ -294,10 +256,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           TextButton(
                               onPressed: () {
                                 if (month_data.isNotEmpty) month_data.clear();
-                                month_data = dashboard_controller.julydata("6");
+                                month_data = dashboardController.julydata("6");
 
                                 if (dataMap.isNotEmpty) dataMap.clear();
-                                dataMap = dashboard_controller.myfunction("6");
+                                dataMap = dashboardController.myfunction("6");
 
                                 setState(() {});
                               },
@@ -305,10 +267,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           TextButton(
                               onPressed: () {
                                 if (month_data.isNotEmpty) month_data.clear();
-                                month_data = dashboard_controller.julydata("7");
+                                month_data = dashboardController.julydata("7");
 
                                 if (dataMap.isNotEmpty) dataMap.clear();
-                                dataMap = dashboard_controller.myfunction("7");
+                                dataMap = dashboardController.myfunction("7");
 
                                 setState(() {});
                               },
@@ -316,10 +278,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           TextButton(
                               onPressed: () {
                                 if (month_data.isNotEmpty) month_data.clear();
-                                month_data = dashboard_controller.julydata("8");
+                                month_data = dashboardController.julydata("8");
 
                                 if (dataMap.isNotEmpty) dataMap.clear();
-                                dataMap = dashboard_controller.myfunction("8");
+                                dataMap = dashboardController.myfunction("8");
 
                                 setState(() {});
                               },
@@ -327,10 +289,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           TextButton(
                               onPressed: () {
                                 if (month_data.isNotEmpty) month_data.clear();
-                                month_data = dashboard_controller.julydata("9");
+                                month_data = dashboardController.julydata("9");
 
                                 if (dataMap.isNotEmpty) dataMap.clear();
-                                dataMap = dashboard_controller.myfunction("9");
+                                dataMap = dashboardController.myfunction("9");
 
                                 setState(() {});
                               },
@@ -338,11 +300,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           TextButton(
                               onPressed: () {
                                 if (month_data.isNotEmpty) month_data.clear();
-                                month_data =
-                                    dashboard_controller.julydata("10");
+                                month_data = dashboardController.julydata("10");
 
                                 if (dataMap.isNotEmpty) dataMap.clear();
-                                dataMap = dashboard_controller.myfunction("10");
+                                dataMap = dashboardController.myfunction("10");
 
                                 setState(() {});
                               },
@@ -350,23 +311,22 @@ class _MyHomePageState extends State<MyHomePage> {
                           TextButton(
                               onPressed: () {
                                 if (month_data.isNotEmpty) month_data.clear();
-                                month_data =
-                                    dashboard_controller.julydata("11");
+                                month_data = dashboardController.julydata("11");
 
                                 if (dataMap.isNotEmpty) dataMap.clear();
-                                dataMap = dashboard_controller.myfunction("11");
+                                dataMap = dashboardController.myfunction("11");
 
                                 setState(() {});
+
                               },
                               child: const Text("Nov")),
                           TextButton(
                               onPressed: () {
                                 if (month_data.isNotEmpty) month_data.clear();
-                                month_data =
-                                    dashboard_controller.julydata("12");
+                                month_data = dashboardController.julydata("12");
 
                                 if (dataMap.isNotEmpty) dataMap.clear();
-                                dataMap = dashboard_controller.myfunction("12");
+                                dataMap = dashboardController.myfunction("12");
 
                                 setState(() {});
                               },
@@ -381,14 +341,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(18.0),
-                      child: dataMap.isNotEmpty
-                          ? PieChart(
+                      child: dataMap.isNotEmpty ? PieChart(
                         dataMap: dataMap,
-                        animationDuration:
-                        const Duration(milliseconds: 1800),
-                        // chartLegendSpacing: 15,
-                        chartRadius:
-                        MediaQuery.of(context).size.width / 3,
+                        animationDuration: const Duration(milliseconds: 1800),
+                        chartRadius:MediaQuery.of(context).size.width / 3,
                         colorList: colorList,
                         initialAngleInDegree: 0,
                         chartType: ChartType.ring,
@@ -404,20 +360,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         chartValuesOptions: const ChartValuesOptions(
                           showChartValueBackground: false,
                           showChartValues: true,
-                          chartValueStyle: TextStyle(
-                              color: Colors.black,
-                              fontSize: 11,
-                              fontWeight: FontWeight.bold),
+                          chartValueStyle: TextStyle(color: Colors.black, fontSize: 11, fontWeight: FontWeight.bold),
                           showChartValuesInPercentage: false,
                           showChartValuesOutside: true,
                           decimalPlaces: 0,
                         ),
                       )
-                          : const Text(
-                        "First Set Your Salary \nThen Add a Expences",
-                        style: TextStyle(
-                            color: Colors.pink,
-                            fontWeight: FontWeight.bold),
+                          : const Text("First Set Your Salary \nThen Add a Expences", style: TextStyle(color: Colors.pink,fontWeight: FontWeight.bold),
                       ),
                     ),
                     const SizedBox(
@@ -426,7 +375,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Container(
                       margin: const EdgeInsets.fromLTRB(0, 0, 0, 45),
                       child: SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
+                      scrollDirection: Axis.vertical,
                         child: ListView.builder(
                           itemCount: month_data.length,
                           shrinkWrap: true,
@@ -440,27 +389,21 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                                 margin: const EdgeInsets.all(5),
                                 child: Container(
-                                  margin:
-                                  const EdgeInsets.fromLTRB(0, 0, 45, 0),
+                                  margin: const EdgeInsets.fromLTRB(0, 0, 45, 0),
                                   child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:MainAxisAlignment.spaceBetween,
                                     children: [
                                       Container(
                                         padding: const EdgeInsets.all(10),
                                         decoration: BoxDecoration(
                                           color: Colors.greenAccent,
-                                          borderRadius:
-                                          BorderRadius.circular(10),
+                                          borderRadius: BorderRadius.circular(10),
                                         ),
                                         margin: const EdgeInsets.all(10),
                                         child: Column(
                                           children: [
-                                            Text(
-                                              month_data[index]["catagory"].toString(),
-                                              style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold),
+                                            Text(month_data[index]["catagory"].toString(),
+                                              style: const TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
                                             ),
                                           ],
                                         ),
@@ -477,17 +420,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                           children: [
                                             Text(
                                               month_data[index]["price"].toString(),
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.bold),
+                                              style: const TextStyle(fontWeight: FontWeight.bold),
                                             ),
                                             Text(
                                                 month_data[index]["date"].toString().substring(0, 10),
-                                                style: const TextStyle(
-                                                    fontWeight:
-                                                    FontWeight.bold)),
+                                                style: const TextStyle(fontWeight: FontWeight.bold)),
                                             InkWell(
                                                 onTap: () {
-                                                  dashboard_controller.mydelete(month_data[index]['id']);
+                                                  dashboardController.mydelete(month_data[index]['id']);
                                                 },
                                                 child: const Text("Delete"))
                                           ],
@@ -495,7 +435,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                       )
                                     ],
                                   ),
-                                ));
+                                )
+                            );
                           },
                         ),
                       ),
@@ -504,62 +445,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            floatingActionButton: Container(
-              child: FloatingActionButton(
-                mini: true,
-                onPressed: () {
-                  Get.to(add_expense())
-                      ?.then((value) => dashboard_controller.mydatas());
-                },
-                child: const Icon(
-                  Icons.add,
-                  color: Colors.pink,
-                ),
-              ),
+            floatingActionButton: FloatingActionButton(mini: true,
+              onPressed: () {
+                Get.to(add_expense())?.then((value) => dashboardController.mydatas());
+              },
+              child: const Icon(Icons.add, color: Colors.pink,),
             ),
-
-            /* drawer: Drawer(
-              child: ListView(
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Image.asset(
-                    'assets/icon.png',
-                    height: 100,
-                    width: 100,
-                  ),
-                  ListTile(
-                    title: const Text(
-                      "My EP",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                    onTap: () => Navigator.pop(context),
-                  ),
-                  ListTile(
-                    title: InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text(
-                        "Settings",
-                        style: TextStyle(),
-                      ),
-                    ),
-                    leading: const Icon(Icons.settings),
-                    onTap: () => Navigator.pop(context),
-                  ),
-                  ListTile(
-                    title: const Text("About"),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    leading: const Icon(Icons.account_balance_outlined),
-                  ),
-                ],
-              ),
-            ),*/
           );
         });
   }
