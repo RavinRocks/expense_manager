@@ -59,8 +59,7 @@ class list_expenses_controller extends GetxController {
     total_expense.value=0.0;
     print("${data.length} length");
     int mymonth=int.parse(month);
-    if(mymonth<=9)
-    {
+    if(mymonth<=9) {
       month="0$month";
     }
     for(var i=0;i<data.length;i++)
